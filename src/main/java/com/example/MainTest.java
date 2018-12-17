@@ -13,16 +13,93 @@ import java.io.InputStream;
 import java.util.List;
 
 public class MainTest {
-    @Test
-    public void test() throws IOException {
-        InputStream in = Resources.getResourceAsStream("mybatis-config.xml");
+    private SqlSession getSQLSession() {
+        InputStream in = null;
+        try {
+            in = Resources.getResourceAsStream("mybatis-config.xml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
-        SqlSession sqlSession = factory.openSession();
+        return factory.openSession();
+    }
+
+
+    @Test
+    public void test() {
+        SqlSession sqlSession = getSQLSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         List<User> list = userMapper.getList();
         System.out.println(list);
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
