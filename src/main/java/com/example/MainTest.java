@@ -31,6 +31,7 @@ public class MainTest {
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         List<User> list = userMapper.getList();
         System.out.println(list);
+        sqlSession.close();
     }
 
 

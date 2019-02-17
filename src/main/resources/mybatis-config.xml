@@ -3,13 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
+<!--全局配置文件：配置数据库 连接池 事务管理等-->
 <configuration>
+
     <settings>
         <setting name="logImpl" value="LOG4J"/>
     </settings>
+
+    <!--别名处理器，别名不区分大小写，-->
+    <typeAliases>
+        <!--单个，alias默认类名小写-->
+        <!--<typeAlias type="com.example.entity.User" alias="user"/>-->
+
+        <!--批量别名，当前包和子包下每个类起默认别名，若不同包有相同类名，使用Alias注解区分-->
+        <package name="com.example.entity" />
+    </typeAliases>
+
+    <!--default:切换环境：开发/测试-->
     <environments default="development">
         <environment id="development">
+            <!--事务管理器 jdbc：jdbc事务控制， managed:j2ee容器事务控制-->
             <transactionManager type="JDBC"/>
+            <!--数据源:unpooled pooled jndi，还可以填写自定义数据源的全类名-->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://127.0.0.1:3307/mybatis"/>
@@ -18,9 +33,14 @@
             </dataSource>
         </environment>
     </environments>
+
+
+
     <mappers>
+        <!--resource:类路径下 url：磁盘/网络下-->
         <mapper resource="mapper/UserMapper.xml"/>
     </mappers>
+
 </configuration>
 
 
