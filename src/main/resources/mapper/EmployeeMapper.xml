@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.EmployeeMapper">
+
+    <!--自定义JavaBean封装规则-->
+    <resultMap id="EmpDeptMap" type="employee">
+        <id property="employeeId" column="employee_id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="dept.deptId" column="department_id"/>
+        <result property="dept.deptName" column="department_name"/>
+    </resultMap>
+
+    <!--自定义JavaBean封装规则，使用 association -->
+    <resultMap id="EmpDeptMap2" type="employee">
+        <id property="employeeId" column="employee_id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <association property="dept" javaType="dept">
+            <id property="deptId" column="department_id"/>
+            <result property="deptName" column="department_name"/>
+        </association>
+    </resultMap>
+
+    <!--association 分布查询，延迟加载-->
+    <resultMap id="EmpDeptMap_3" type="employee">
+        <id property="employeeId" column="employee_id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <association property="dept" select="com.example.mapper.DeptMapper.getDeptById" column="department_id"/>
+    </resultMap>
+
+
+
+
+    <select id="getEmpAndDept" resultMap="EmpDeptMap2">
+        SELECT
+            e.employee_id,
+            e.first_name,
+            e.last_name,
+            e.email,
+            d.department_id,
+            d.department_name
+        FROM
+            employees e
+        LEFT JOIN departments d ON e.department_id = d.department_id
+        WHERE e.employee_id = #{id}
+    </select>
+
+
+
+    <select id="getEmpAndDeptStep" resultMap="EmpDeptMap_3">
+        SELECT * FROM employees e  WHERE e.employee_id = #{id}
+    </select>
+
+    <select id="getEmployeeByDeptId" resultMap="EmpDeptMap">
+        SELECT * FROM employees e  WHERE e.department_id = #{id}
+    </select>
+
+</mapper>
+
+
+
+

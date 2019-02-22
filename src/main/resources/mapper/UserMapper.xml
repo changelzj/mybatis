@@ -4,12 +4,54 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.mapper.UserMapper">
-    <insert id="add">
-        INSERT INTO tb_user(`name`, age, sex) VALUES (#{name}, #{age}, #{sex})
+    <!--    useGeneratedKeys默认是false，开启后返回自增主键,keyProperty封装到JavaBean的哪个属性  -->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_user(id, `name`, age, sex) VALUES (#{id}, #{name}, #{age}, #{sex})
     </insert>
+
+    <select id="findById" resultType="user">
+      SELECT `name`, age, sex FROM tb_user WHERE `id` = #{id}
+    </select>
+
+    <update id="update">
+      UPDATE `tb_user`
+      SET `name` = #{name}, `sex` = #{sex}, `age` = #{age}
+      WHERE `id` = #{id}
+    </update>
 
     <select id="getList" resultType="user">
         SELECT `name`, age, sex FROM tb_user
+    </select>
+
+    <delete id="delete">
+        DELETE FROM `tb_user` WHERE `id` = #{id}
+    </delete>
+
+    <select id="getByIdAndName" resultType="user">
+        <!-- 多个参数会被封装成map，只能写参数名只能写成 param1 param2 ...param n或 0 1 -->
+        <!-- SELECT `name`, age, sex FROM tb_user WHERE `id` = #{param1} AND name = #{param2} -->
+        <!-- SELECT `name`, age, sex FROM tb_user WHERE `id` = #{arg1} AND name = #{arg0} -->
+
+        <!--注解:注解明确指定命名的key ,代替param arg-->
+        SELECT `name`, age, sex FROM tb_user WHERE `id` = #{id} AND name = #{name}
+    </select>
+
+    <select id="getByIdAndUser" resultType="user">
+        SELECT `name`, age, sex FROM tb_user WHERE `id` = #{param1} AND name = #{param2.name}
+    </select>
+
+    <!--    collection array 参数的特殊处理：封装进map内，
+    封装对应的key:
+        List :  list
+        Array : array
+        Collection : collection
+     -->
+    <select id="findByIds" resultType="user">
+        SELECT `name`, age, sex FROM tb_user WHERE `id` = #{list[0]}
+    </select>
+
+    <select id="getKeyMap" resultType="user">
+        SELECT id, `name`, age, sex FROM tb_user WHERE `id` = #{id}
     </select>
 </mapper>
 

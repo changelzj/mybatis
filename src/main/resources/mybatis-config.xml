@@ -8,6 +8,10 @@
 
     <settings>
         <setting name="logImpl" value="LOG4J"/>
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--关闭全部加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 
     <!--别名处理器，别名不区分大小写，-->
@@ -37,8 +41,15 @@
 
 
     <mappers>
-        <!--resource:类路径下 url：磁盘/网络下-->
+        <!--resource:类路径下 url：磁盘/网络下
+        class：写接口的全类名，映射文件与接口同名，且在同一路径下，基于注解开发时不需要映射文件-->
         <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/EmployeeMapper.xml"/>
+        <mapper resource="mapper/DeptMapper.xml"/>
+        <mapper class="com.example.mapper.AnnoUserMapper"/>
+
+        <!--批量注册，映射文件与接口同名，且在同一路径下-->
+        <!--<package name="包名"-->
     </mappers>
 
 </configuration>
