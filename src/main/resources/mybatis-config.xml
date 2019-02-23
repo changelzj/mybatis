@@ -12,6 +12,9 @@
         <setting name="lazyLoadingEnabled" value="true"/>
         <!--关闭全部加载-->
         <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 开启缓存，默认也是开启的，只控制二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+
     </settings>
 
     <!--别名处理器，别名不区分大小写，-->

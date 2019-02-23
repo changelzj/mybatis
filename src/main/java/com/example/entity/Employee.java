@@ -1,6 +1,8 @@
 package com.example.entity;
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
     private Integer employeeId;
     private String firstName;
     private String lastName;
@@ -58,6 +60,17 @@ public class Employee {
 
     public void setDept(Dept dept) {
         this.dept = dept;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", dept=" + dept +
+                '}';
     }
 }
 

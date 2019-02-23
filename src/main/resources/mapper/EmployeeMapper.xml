@@ -5,6 +5,30 @@
 
 <mapper namespace="com.example.mapper.EmployeeMapper">
 
+    <!--开启二级缓存-->
+    <cache/>
+
+    <!--
+    eviction="" 回收策略
+        LRU(默认) - 最近最少使用，移除长时间未使用的对象
+        FIFO - 先进先出，按照进入顺序来移除它们
+        SOFT - 软引用，移除垃圾回收器状态的软引用对象
+        WEAK - 弱引用，更积极地移除垃圾回收器状态的弱引用对象
+
+    flushInterval=""  刷新间隔
+        多长时间清空一次，默认不清空，设置毫秒值进行清空
+
+    readOnly="" true/false 是否只读，默认非只读
+        只读true - mybatis认为所有从缓存获取数据的操作都是读取操作，不会修改数据，为了加快查询速度
+    会直接将数据在缓存中的引用交给用户，速度快但是可能不安全
+
+         非只读false - mybatis认为查到的数据可能会被修改，使用序列化反序列化机制，克隆一个缓存中的数据交给用户
+         因反序列化，速度慢些，安全度高（实体要实现序列化接口）
+
+    size = 缓存大小
+    type = 自定义一个缓存
+    -->
+
     <!--自定义JavaBean封装规则-->
     <resultMap id="EmpDeptMap" type="employee">
         <id property="employeeId" column="employee_id"/>
@@ -59,6 +83,39 @@
     <select id="getEmployeeByDeptId" resultMap="EmpDeptMap">
         SELECT * FROM employees e  WHERE e.department_id = #{id}
     </select>
+
+
+    <select id="queryList" resultType="employee">
+        SELECT
+            e.employee_id AS employeeId,
+            e.first_name AS firstName,
+            e.last_name AS lastName,
+            e.email
+        FROM
+            employees e
+        <where>
+            <if test="employeeId != null">
+                e.employee_id = #{employeeId}
+            </if>
+            <if test="firstName != null and firstName != '' ">
+                AND e.first_name = #{firstName}
+            </if>
+            <if test="lastName != null and lastName != '' ">
+                AND e.last_name = #{lastName}
+            </if>
+            <if test="email != null and email != '' ">
+                AND e.email = #{email}
+            </if>
+        </where>
+
+    </select>
+
+
+
+
+
+
+
 
 </mapper>
 

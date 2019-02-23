@@ -1,8 +1,9 @@
 package com.example.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Dept {
+public class Dept implements Serializable {
     private Integer deptId;
     private String deptName;
     private List<Employee> employees;

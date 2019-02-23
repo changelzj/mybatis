@@ -22,7 +22,7 @@ public class MainTest {
             e.printStackTrace();
         }
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
-        return factory.openSession();
+        return factory.openSession(true);
     }
 
 
