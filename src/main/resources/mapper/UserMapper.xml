@@ -20,7 +20,7 @@
     </update>
 
     <select id="getList" resultType="user">
-        SELECT `name`, age, sex FROM tb_user
+        SELECT id, `name`, age, sex FROM tb_user
     </select>
 
     <delete id="delete">
