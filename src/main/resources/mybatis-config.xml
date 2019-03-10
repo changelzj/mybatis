@@ -49,8 +49,9 @@
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/EmployeeMapper.xml"/>
         <mapper resource="mapper/DeptMapper.xml"/>
-        <mapper class="com.example.mapper.AnnoUserMapper"/>
+        <mapper resource="mapper/StudentMapper.xml"/>
 
+        <mapper class="com.example.mapper.AnnoUserMapper"/>
         <!--批量注册，映射文件与接口同名，且在同一路径下-->
         <!--<package name="包名"-->
     </mappers>

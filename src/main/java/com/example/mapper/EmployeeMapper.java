@@ -13,6 +13,8 @@ public interface EmployeeMapper {
     Employee getEmployeeByDeptId(Integer id);
 
     List<Employee> queryList(Employee employee);
+
+    void updateEmployee(Employee employee);
 }
 
 

@@ -35,6 +35,18 @@ public class MainTest2 {
     }
 
     @Test
+    public void testUpdate() {
+        SqlSession sqlSession = MainTest.getSQLSession();
+        EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+        Employee employee = new Employee();
+        employee.setEmail("120@qq.com");
+        employee.setFirstName("小垃圾");
+        employee.setEmployeeId(4);
+        mapper.updateEmployee(employee);
+        sqlSession.commit();
+    }
+
+    @Test
     public void testEmpDept() {
         SqlSession sqlSession = MainTest.getSQLSession();
         EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);

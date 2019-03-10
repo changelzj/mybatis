@@ -27,6 +27,10 @@ public interface UserMapper {
     /*组合参数*/
     User getByIdAndUser(Integer id, User user);
 
+
+
+
+
     User findByIds(List<Integer> ids);
 
     /*封装map时使用哪个属性作为键*/
