@@ -49,7 +49,7 @@ public class MainTest {
         //默认不自动提交
         SqlSession sqlSession = getSQLSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        User user = new User(null, "cherry9", "nv", 25);
+        User user = new User(null, "cherry91", "nv", 25);
         Integer res = userMapper.add(user);
         Integer id = user.getId();
         System.out.println(id);

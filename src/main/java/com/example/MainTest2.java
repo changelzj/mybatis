@@ -58,7 +58,7 @@ public class MainTest2 {
     public void testLazy() throws InterruptedException {
         SqlSession sqlSession = MainTest.getSQLSession();
         EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
-        Employee step = mapper.getEmpAndDeptStep(200);
+        Employee step = mapper.getEmpAndDeptStep(2);
         step.getEmail();
         Thread.sleep(5000);
         step.getDept();

@@ -34,7 +34,7 @@
             <!--数据源:unpooled pooled jndi，还可以填写自定义数据源的全类名-->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis"/>
+                <property name="url" value="jdbc:mysql://192.168.228.101:3306/mybatis"/>
                 <property name="username" value="root"/>
                 <property name="password" value="lzj"/>
             </dataSource>
